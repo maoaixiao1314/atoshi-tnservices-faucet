@@ -1,0 +1,15 @@
+version: '3'
+services:
+  treasureNet_faucet:
+    image: treasurenet/faucet:1
+    restart: unless-stopped
+    container_name: faucet
+    environment:
+      - MONGO_URL=mongodb+srv://treasureNet:Lf7bZVPpArjyru9O@tnclusterm20.a9fcq.mongodb.net/treasureNet?retryWrites=true&w=majority
+      - BLOCKCHAIN_NODE_HTTP=https://node1.testnet.treasurenet.io
+      - PORT=3009
+      - MQ_SECRETKEY=S44tRlCHinE4ratraSaRipr5YeWRaylWruWlvAcoqevuFRethL
+      - MQ_HOST=http://faucet.testnet.treasurenet.io:3016
+      - RECAPTCHA_SECRETKEY=6LdXkwQhAAAAACAuRhQF_oaRIJoJvUi--qkgjMX9
+    ports:
+      - 3009:3009
