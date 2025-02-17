@@ -1,7 +1,7 @@
 version: '3'
 services:
   hetu_faucet:
-    image: hetu/faucet:1
+    image: Hetu/faucet:1
     restart: unless-stopped
     container_name: faucet
     environment:
