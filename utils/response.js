@@ -1,7 +1,7 @@
 /*
  * @Description: 返回值规范
- * @Autor: ChengLiang
- * @Date: 2020-11-26 15:52:40
+ * @Autor: Aurelia
+ * @Date: 2025-2-15
  */
 const codeMap = require('../dict').response;
 
