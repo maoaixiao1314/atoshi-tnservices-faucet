@@ -11,7 +11,7 @@ const moment = require('moment');
 const BigNumber = require('bignumber.js');
 const faucetService = require('../../service/faucetAccount');
 const axios = require('axios');
-const {checkRecaptcha} = require('../../utils/recaptcha');
+// const {checkRecaptcha} = require('../../utils/recaptcha');
 
 const web3 = new Web3(new Web3.providers.HttpProvider(config.nodeHTTP));
 
@@ -114,10 +114,10 @@ class Faucet {
 
     async addTokenBasic(req, res) {
 
-        const err = await checkRecaptcha(req);
-        if (err) {
-            return response.returnError(res, err);
-        }
+        // const err = await checkRecaptcha(req);
+        // if (err) {
+        //     return response.returnError(res, err);
+        // }
 
         const {account} = req.body;
         if (!account || !web3.utils.isAddress(account)) {
@@ -258,10 +258,10 @@ class Faucet {
 
     async addTokenByTwitter(req, res) {
 
-        const err = await checkRecaptcha(req);
-        if (err) {
-            return response.returnError(res, err);
-        }
+        // const err = await checkRecaptcha(req);
+        // if (err) {
+        //     return response.returnError(res, err);
+        // }
 
         const {url} = req.body;
         const tweeturlRULE = new RegExp(/^https:\/\/twitter.com\/([a-zA-Z0-9_]+\/)status\/([0-9]+)/g);
