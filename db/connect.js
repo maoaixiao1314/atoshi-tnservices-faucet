@@ -8,7 +8,7 @@
 const config = require('../config').mongodb;
 const mongoose = require('mongoose');
 
-const DB_URL = config.DB_URL || `mongodb://${config.username}:${config.password}@${config.host}/${config.database}`;
+const DB_URL = config.DB_URL || `mongodb://${config.username}:${config.password}@${config.host}/${config.database}?authSource=admin`;
 
 /**
  * 连接
