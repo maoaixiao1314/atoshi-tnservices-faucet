@@ -42,24 +42,31 @@ const getAccount = async (account) => {
 const updateAccount = async (account) => {
     const query = {account};
     //const expiration = moment().add(1, 'days').toDate();
-    const expiration = moment(moment().add(1, 'days').format('YYYYMMDD')).toDate();
+    // const expiration = moment(moment().add(1, 'days').format('YYYYMMDD')).toDate();
+    const expiration = moment().add(4, 'hours').toDate();
     const checkIn = moment().toDate();
     const data = await FaucetAccountModel.findOne(query).lean().exec();
     const update = {expiration};
     if (data) {
-        if (data.checkIn && parseInt(moment(data.checkIn[data.checkIn.length - 1]).format('YYYYMMDD')) + 1 === parseInt(moment().format('YYYYMMDD'))) {
-            /* 满足续签条件 */
-            if (data.checkIn.length === 7) {
-                /* 签满 */
-                update.checkIn = [checkIn];
-            } else {
+        const lastCheckIn = moment(data.checkIn[data.checkIn.length - 1]);
+        const hoursSinceLastCheckIn = moment().diff(lastCheckIn, 'hours');
+        if (hoursSinceLastCheckIn >= 4) {
                 update.checkIn = [...data.checkIn, checkIn];
-            }
-        } else {
-            /* 不满足续签条件 */
-            update.checkIn = [checkIn];
+                return FaucetAccountModel.update(query, update).exec();
         }
-        return FaucetAccountModel.update(query, update).exec();
+        // if (data.checkIn && parseInt(moment(data.checkIn[data.checkIn.length - 1]).format('YYYYMMDD')) + 1 === parseInt(moment().format('YYYYMMDD'))) {
+        //     /* 满足续签条件 */
+        //     if (data.checkIn.length === 7) {
+        //         /* 签满 */
+        //         update.checkIn = [checkIn];
+        //     } else {
+        //         update.checkIn = [...data.checkIn, checkIn];
+        //     }
+        // } else {
+        //     /* 不满足续签条件 */
+        //     update.checkIn = [checkIn];
+        // }
+        // return FaucetAccountModel.update(query, update).exec();
     } else {
         /* 没有记录 */
         const newdata = {...query, ...update, checkIn: [checkIn]};

@@ -30,7 +30,7 @@ class Faucet {
         try {
             const expflag = await faucetService.checkAccount(account);
             if (expflag) {
-                return response.returnSuccess(res, 'You can only get it once a day!');
+                return response.returnSuccess(res, 'You can only claim it once every four hours!');
             } else {
                 next();
             }
@@ -99,10 +99,11 @@ class Faucet {
                 const data = await faucetService.getAccount(account);
                 if (data) {
                     /* 已经存在 */
-                    if (data.checkIn && data.checkIn.length === 6 && parseInt(moment(data.checkIn[data.checkIn.length - 1]).format('YYYYMMDD')) + 1 === parseInt(moment().format('YYYYMMDD'))) {
-                        /* data.checkIn 已经有6条记录 并且今天符合第7条记录的要求 */
-                        return resolve({unit: config.basicAmount.unit * 2, tat: config.basicAmount.tat * 2});
-                    }
+                    // if (data.checkIn && data.checkIn.length === 6 && parseInt(moment(data.checkIn[data.checkIn.length - 1]).format('YYYYMMDD')) + 1 === parseInt(moment().format('YYYYMMDD'))) {
+                    //     /* data.checkIn 已经有6条记录 并且今天符合第7条记录的要求 */
+                    //     return resolve({unit: config.basicAmount.unit * 2, tat: config.basicAmount.tat * 2});
+                    // }
+                    return resolve({unit: config.basicAmount.unit, tat: config.basicAmount.tat});
                 }
                 return resolve({unit: config.basicAmount.unit, tat: config.basicAmount.tat});
 
