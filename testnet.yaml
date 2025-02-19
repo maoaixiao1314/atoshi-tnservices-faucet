@@ -11,11 +11,11 @@ services:
       # - MQ_SECRETKEY=S44tRlCHinE4ratraSaRipr5YeWRaylWruWlvAcoqevuFRethL
       # - MQ_HOST=http://faucet.testnet.treasurenet.io:3016
       # - RECAPTCHA_SECRETKEY=6LdXkwQhAAAAACAuRhQF_oaRIJoJvUi--qkgjMX9
-      - MONGO_URL=http://13.250.113.33:27017
-      - BLOCKCHAIN_NODE_HTTP=http://13.250.113.33:8545
+      - MONGO_URL=http://54.169.234.21:27017
+      - BLOCKCHAIN_NODE_HTTP=http://54.169.234.21:8545
       - PORT=3009
       - MQ_SECRETKEY=S44tRlCHinE4ratraSaRipr5YeWRaylWruWlvAcoqevuFRethL
-      - MQ_HOST=http://13.250.113.33:3016
+      - MQ_HOST=http://54.169.234.21:3016
       - RECAPTCHA_SECRETKEY=6LcH7dYqAAAAACjsC1UzJtPyXZ9nL2hrI-QuWfMH
     ports:
       - 3009:3009
